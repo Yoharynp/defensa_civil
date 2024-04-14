@@ -57,10 +57,10 @@ class _ScreenHomeScreenState extends State<ScreenHomeScreen>
     const InicioScreen(),
     const NoticiasScreen(),
     const GaleriaImagenesScreen(),
-    const AlbergueScreen(),
+    const AlberguesScreen(),
     const MapaPopUpScreen(),
     const MedidasPreventicasScreen(),
-    const MimebrosScreen(),
+    const MiembrosScreen(),
     const VoluntarioScreen(),
     const ReportarSitaucionesScreen(),
     const MisSituacionesScreen(),
@@ -77,14 +77,11 @@ class _ScreenHomeScreenState extends State<ScreenHomeScreen>
     });
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blueGrey[900],
-      body: Stack(
-        children: [
+      body: Stack(children: [
         AnimatedPositioned(
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut,
@@ -111,7 +108,7 @@ class _ScreenHomeScreenState extends State<ScreenHomeScreen>
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
           left: isMenuOpen ? 0 : 220,
-          top: isMenuOpen ? 0  : 50,
+          top: isMenuOpen ? 0 : 50,
           child: MenuButtom(
             controller: _controller,
             onMenuPressed: () {
