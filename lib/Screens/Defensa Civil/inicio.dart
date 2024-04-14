@@ -37,27 +37,39 @@ class _InicioScreenState extends State<InicioScreen>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    _miembros = [];
     _animationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 300),
     );
     audioPlayer = AudioPlayer();
     audioPlayer.onPositionChanged.listen((Duration duration) {
-      setState(() {
-        _currentPosition = duration.inSeconds.toDouble();
-      });
+      _updateAudioPosition(duration);
     });
 
     // Obtiene la duración total del audio una vez que se carga
     audioPlayer.onDurationChanged.listen((Duration duration) {
-      setState(() {
-        _totalDuration = duration.inSeconds.toDouble();
-      });
+      _updateAudioDuration(duration);
     });
     fetchData();
     _fetchDataMiembros();
+  }
+
+  void _updateAudioPosition(Duration duration) {
+    if (mounted) {
+      setState(() {
+        _currentPosition = duration.inSeconds.toDouble();
+      });
+    }
+  }
+
+  void _updateAudioDuration(Duration duration) {
+    if (mounted) {
+      setState(() {
+        _totalDuration = duration.inSeconds.toDouble();
+      });
+    }
   }
 
   @override
@@ -75,186 +87,188 @@ class _InicioScreenState extends State<InicioScreen>
                     bottomLeft: Radius.circular(35),
                     bottomRight: Radius.circular(35)),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 100,
-                  ),
-                  Container(
-                    height: 150,
-                    width: 150,
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Color(0xff0a4271),
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(30),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(
+                      height: 100,
                     ),
-                    child: Container(
+                    Container(
+                      height: 150,
+                      width: 150,
+                      padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(80),
+                        color: Color(0xff0a4271),
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(30),
                       ),
-                      child: Image.asset(
-                        'assets/logo.png',
-                        width: 150,
-                        height: 150,
-                        fit: BoxFit.fill,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(80),
+                        ),
+                        child: Image.asset(
+                          'assets/logo.png',
+                          width: 150,
+                          height: 150,
+                          fit: BoxFit.fill,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      AnimatedContainer(
-                        duration: Duration(milliseconds: 300),
-                        height: 40,
-                        width: 80,
-                        decoration: BoxDecoration(
-                            color: isSelect == 0
-                                ? Color(0xff0a4271)
-                                : Color(0xffEE782E),
-                            borderRadius: BorderRadius.circular(30),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black.withOpacity(0.3),
-                                  blurRadius: 5,
-                                  offset: Offset(0, 7))
-                            ]),
-                        child: FittedBox(
-                          fit: BoxFit.cover,
-                          child: TextButton(
-                            onPressed: () {
-                              setState(() {
-                                isSelect = 0;
-                              });
-                            },
-                            child: Text(
-                              'Inicio',
-                              style: GoogleFonts.inter(
-                                  color: isSelect == 0
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w300),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        AnimatedContainer(
+                          duration: Duration(milliseconds: 300),
+                          height: 40,
+                          width: 80,
+                          decoration: BoxDecoration(
+                              color: isSelect == 0
+                                  ? Color(0xff0a4271)
+                                  : Color(0xffEE782E),
+                              borderRadius: BorderRadius.circular(30),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black.withOpacity(0.3),
+                                    blurRadius: 5,
+                                    offset: Offset(0, 7))
+                              ]),
+                          child: FittedBox(
+                            fit: BoxFit.cover,
+                            child: TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  isSelect = 0;
+                                });
+                              },
+                              child: Text(
+                                'Inicio',
+                                style: GoogleFonts.inter(
+                                    color: isSelect == 0
+                                        ? Colors.white
+                                        : Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w300),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      AnimatedContainer(
-                        duration: Duration(milliseconds: 300),
-                        height: 40,
-                        width: 80,
-                        decoration: BoxDecoration(
-                            color: isSelect == 1
-                                ? Color(0xff0a4271)
-                                : Color(0xffEE782E),
-                            borderRadius: BorderRadius.circular(30),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black.withOpacity(0.3),
-                                  blurRadius: 5,
-                                  offset: Offset(0, 7))
-                            ]),
-                        child: FittedBox(
-                          fit: BoxFit.cover,
-                          child: TextButton(
-                            onPressed: () {
-                              setState(() {
-                                isSelect = 1;
-                              });
-                            },
-                            child: Text(
-                              'Historia',
-                              style: GoogleFonts.inter(
-                                  color: isSelect == 1
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w300),
+                        AnimatedContainer(
+                          duration: Duration(milliseconds: 300),
+                          height: 40,
+                          width: 80,
+                          decoration: BoxDecoration(
+                              color: isSelect == 1
+                                  ? Color(0xff0a4271)
+                                  : Color(0xffEE782E),
+                              borderRadius: BorderRadius.circular(30),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black.withOpacity(0.3),
+                                    blurRadius: 5,
+                                    offset: Offset(0, 7))
+                              ]),
+                          child: FittedBox(
+                            fit: BoxFit.cover,
+                            child: TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  isSelect = 1;
+                                });
+                              },
+                              child: Text(
+                                'Historia',
+                                style: GoogleFonts.inter(
+                                    color: isSelect == 1
+                                        ? Colors.white
+                                        : Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w300),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      AnimatedContainer(
-                        duration: Duration(milliseconds: 300),
-                        height: 40,
-                        width: 80,
-                        decoration: BoxDecoration(
-                            color: isSelect == 2
-                                ? Color(0xff0a4271)
-                                : Color(0xffEE782E),
-                            borderRadius: BorderRadius.circular(30),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black.withOpacity(0.3),
-                                  blurRadius: 5,
-                                  offset: Offset(0, 7))
-                            ]),
-                        child: FittedBox(
-                          fit: BoxFit.cover,
-                          child: TextButton(
-                            onPressed: () {
-                              setState(() {
-                                isSelect = 2;
-                              });
-                            },
-                            child: Text(
-                              'Servicios',
-                              style: GoogleFonts.inter(
-                                  color: isSelect == 2
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w300),
+                        AnimatedContainer(
+                          duration: Duration(milliseconds: 300),
+                          height: 40,
+                          width: 80,
+                          decoration: BoxDecoration(
+                              color: isSelect == 2
+                                  ? Color(0xff0a4271)
+                                  : Color(0xffEE782E),
+                              borderRadius: BorderRadius.circular(30),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black.withOpacity(0.3),
+                                    blurRadius: 5,
+                                    offset: Offset(0, 7))
+                              ]),
+                          child: FittedBox(
+                            fit: BoxFit.cover,
+                            child: TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  isSelect = 2;
+                                });
+                              },
+                              child: Text(
+                                'Servicios',
+                                style: GoogleFonts.inter(
+                                    color: isSelect == 2
+                                        ? Colors.white
+                                        : Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w300),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      AnimatedContainer(
-                        duration: Duration(milliseconds: 300),
-                        height: 40,
-                        width: 80,
-                        decoration: BoxDecoration(
-                            color: isSelect == 3
-                                ? Color(0xff0a4271)
-                                : Color(0xffEE782E),
-                            borderRadius: BorderRadius.circular(30),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black.withOpacity(0.3),
-                                  blurRadius: 5,
-                                  offset: Offset(0, 7))
-                            ]),
-                        child: FittedBox(
-                          fit: BoxFit.cover,
-                          child: TextButton(
-                            onPressed: () {
-                              setState(() {
-                                isSelect = 3;
-                              });
-                            },
-                            child: Text(
-                              'Miembros',
-                              style: GoogleFonts.inter(
-                                  color: isSelect == 3
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w300),
+                        AnimatedContainer(
+                          duration: Duration(milliseconds: 300),
+                          height: 40,
+                          width: 80,
+                          decoration: BoxDecoration(
+                              color: isSelect == 3
+                                  ? Color(0xff0a4271)
+                                  : Color(0xffEE782E),
+                              borderRadius: BorderRadius.circular(30),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black.withOpacity(0.3),
+                                    blurRadius: 5,
+                                    offset: Offset(0, 7))
+                              ]),
+                          child: FittedBox(
+                            fit: BoxFit.cover,
+                            child: TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  isSelect = 3;
+                                });
+                              },
+                              child: Text(
+                                'Miembros',
+                                style: GoogleFonts.inter(
+                                    color: isSelect == 3
+                                        ? Colors.white
+                                        : Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w300),
+                              ),
                             ),
                           ),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               )),
           const SizedBox(height: 10),
           Expanded(
@@ -262,8 +276,8 @@ class _InicioScreenState extends State<InicioScreen>
               duration: Duration(milliseconds: 300),
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: FutureBuilder(
-                future: Future.delayed(Duration(
-                    milliseconds: 900)), // Agregar un pequeño retraso
+                future: Future.delayed(
+                    Duration(milliseconds: 900)), // Agregar un pequeño retraso
                 builder: (context, snapshot) {
                   return isSelect == 0
                       ? _buildIinicio()
@@ -584,6 +598,7 @@ class _InicioScreenState extends State<InicioScreen>
       ),
     );
   }
+
   String _truncateText(String text, int maxLength) {
     return (text.length <= maxLength)
         ? text
@@ -591,11 +606,19 @@ class _InicioScreenState extends State<InicioScreen>
   }
 
   Future<void> _playAudio() async {
-    await audioPlayer.play(AssetSource('narrador.mp3'));
+    if (mounted) {
+      try {
+        await audioPlayer.play(AssetSource('narrador.mp3'));
+      } catch (e) {
+        print('Error al reproducir audio: $e');
+      }
+    }
   }
 
   void _pauseAudio() {
-    audioPlayer.pause();
+    if (mounted) {
+      audioPlayer.pause();
+    }
   }
 
   String _formatDuration(int seconds) {
@@ -606,15 +629,8 @@ class _InicioScreenState extends State<InicioScreen>
       String seconds = twoDigits(duration.inSeconds.remainder(60));
       return '$minutes:$seconds';
     } else {
-      return '00:00'; 
+      return '00:00';
     }
-  }
-
-  @override
-  void dispose() {
-    audioPlayer.dispose();
-    _animationController.dispose();
-    super.dispose();
   }
 
   void fetchData() async {
@@ -635,22 +651,30 @@ class _InicioScreenState extends State<InicioScreen>
       print('Error: $e');
     }
   }
+
   Future<void> _fetchDataMiembros() async {
-  Dio dio = Dio();
-
-  try {
-    Response response = await dio.get('https://adamix.net/defensa_civil/def/miembros.php');
-
-    if (response.statusCode == 200) {
-      final jsonData = response.data;
-      setState(() {
-        _miembros = List<Map<String, dynamic>>.from(jsonData['datos']);
-      });
-    } else {
-      throw Exception('Failed to load data');
+    Dio dio = Dio();
+    try {
+      Response response =
+          await dio.get('https://adamix.net/defensa_civil/def/miembros.php');
+      if (response.statusCode == 200) {
+        final jsonData = response.data;
+        setState(() {
+          _miembros = List<Map<String, dynamic>>.from(jsonData['datos']);
+        });
+      } else {
+        throw Exception('Failed to load data');
+      }
+    } catch (e) {
+      throw Exception('Failed to load data: $e');
     }
-  } catch (e) {
-    throw Exception('Failed to load data: $e');
   }
-}
+
+  @override
+  void dispose() {
+    _pauseAudio(); 
+    _animationController.dispose(); 
+    audioPlayer.dispose(); 
+    super.dispose();
+  }
 }
