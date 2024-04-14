@@ -26,7 +26,7 @@ class _SideMenuScreenState extends State<SideMenuScreen> {
           Container(
             width: 288,
             height: double.infinity,
-            color: Colors.blueGrey[900],
+            color: Color(0xff0a4271),
             child: SafeArea(
               child: Column(
                 children: [
@@ -84,7 +84,7 @@ class _SideMenuScreenState extends State<SideMenuScreen> {
                                     width: _selectedIndex == index ? 288 : 0,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
-                                      color: Colors.blue.withOpacity(0.5),
+                                      color: Colors.white.withOpacity(0.5),
                                     ),
                                   )
                                 ],

@@ -8,6 +8,7 @@ import 'package:defensa_civil/Screens/Defensa%20Civil/miembros.dart';
 import 'package:defensa_civil/Screens/Defensa%20Civil/noticias.dart';
 import 'package:defensa_civil/Screens/Defensa%20Civil/voluntario.dart';
 import 'package:defensa_civil/Screens/Extras/acercade.dart';
+import 'package:defensa_civil/Screens/Extras/login.dart';
 import 'package:defensa_civil/Screens/Post-Login/mapa_situaciones.dart';
 import 'package:defensa_civil/Screens/Post-Login/mis_situaciones.dart';
 import 'package:defensa_civil/Screens/Post-Login/reportar_situacion.dart';
@@ -57,16 +58,17 @@ class _ScreenHomeScreenState extends State<ScreenHomeScreen>
     const InicioScreen(),
     const NoticiasScreen(),
     const GaleriaImagenesScreen(),
-    const AlberguesScreen(),
-    const MapaPopUpScreen(),
+    const AlbergueScreen(),
+    //const MapaPopUpScreen(),
     const MedidasPreventicasScreen(),
-    const MiembrosScreen(),
+    //const MimebrosScreen(),
     const VoluntarioScreen(),
-    const ReportarSitaucionesScreen(),
-    const MisSituacionesScreen(),
-    const MapaSituacionesScreen(),
-    const CambiarContrasenaScreen(),
     const AcercaDeScreen(),
+    const LoginScreen(),
+    // const ReportarSitaucionesScreen(),
+    // const MisSituacionesScreen(),
+    // const MapaSituacionesScreen(),
+    // const CambiarContrasenaScreen(),
   ];
 
   int currentIndex = 0;
@@ -80,8 +82,9 @@ class _ScreenHomeScreenState extends State<ScreenHomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey[900],
-      body: Stack(children: [
+      backgroundColor: Color(0xff0a4271),
+      body: Stack(
+        children: [
         AnimatedPositioned(
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut,
