@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "822da1f9-10f1-4258-8404-3da677e1c4ab",
+		"name": "PostLogin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26385426"
+	},
+	"item": [
+		{
+			"name": "Noticias especificas",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "token",
+							"value": "1490149ee9a5e5a04d66a9d13173b7af",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://adamix.net/defensa_civil/def/noticias_especificas.php",
+					"protocol": "https",
+					"host": [
+						"adamix",
+						"net"
+					],
+					"path": [
+						"defensa_civil",
+						"def",
+						"noticias_especificas.php"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mis situaciones",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "token",
+							"value": "1490149ee9a5e5a04d66a9d13173b7af",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://adamix.net/defensa_civil/def/situaciones.php",
+					"protocol": "https",
+					"host": [
+						"adamix",
+						"net"
+					],
+					"path": [
+						"defensa_civil",
+						"def",
+						"situaciones.php"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Nueva situacion",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "titulo",
+							"value": "Titulo de prueba",
+							"type": "text"
+						},
+						{
+							"key": "descripcion",
+							"value": "Descripcion de prueba",
+							"type": "text"
+						},
+						{
+							"key": "foto",
+							"type": "file",
+							"src": "/C:/Users/jesus/OneDrive/Imágenes/Explosion.png"
+						},
+						{
+							"key": "latitud",
+							"value": "18.9",
+							"type": "text"
+						},
+						{
+							"key": "longitud",
+							"value": "-71",
+							"type": "text"
+						},
+						{
+							"key": "token",
+							"value": "a24b24e5568b874f64f0af40de8fe1cb",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://adamix.net/defensa_civil/def/nueva_situacion.php",
+					"protocol": "https",
+					"host": [
+						"adamix",
+						"net"
+					],
+					"path": [
+						"defensa_civil",
+						"def",
+						"nueva_situacion.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cambiar clave",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "token",
+							"value": "a24b24e5568b874f64f0af40de8fe1cb",
+							"type": "text"
+						},
+						{
+							"key": "clave_anterior",
+							"value": "5033",
+							"type": "text"
+						},
+						{
+							"key": "clave_nueva",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://adamix.net/defensa_civil/def/cambiar_clave.php",
+					"protocol": "https",
+					"host": [
+						"adamix",
+						"net"
+					],
+					"path": [
+						"defensa_civil",
+						"def",
+						"cambiar_clave.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
