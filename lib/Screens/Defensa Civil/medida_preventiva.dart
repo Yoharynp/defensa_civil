@@ -30,6 +30,7 @@ class _MedidasPreventicasScreenState extends State<MedidasPreventicasScreen> {
 
   @override
   Widget build(BuildContext context) {
+      int _selectedNumber = 1;
     return Scaffold(
       backgroundColor: Color.fromRGBO(238, 120, 46, 1),
       body: Column(
