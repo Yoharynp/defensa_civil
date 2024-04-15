@@ -16,6 +16,7 @@ class _GaleriaScreenState extends State<GaleriaScreen> {
   @override
   void initState() {
     super.initState();
+    _videos = [];
     _fetchData();
   }
 
