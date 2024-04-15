@@ -1,5 +1,6 @@
 import 'dart:math';
-import 'package:defensa_civil/Screens/Defensa%20Civil/albergues.dart';
+import 'package:defensa_civil/Screens/Defensa%20Civil/AlberguesScreens/albergues.dart';
+import 'package:defensa_civil/Screens/Defensa%20Civil/AlberguesScreens/navigator.dart';
 import 'package:defensa_civil/Screens/Defensa%20Civil/galeria.dart';
 import 'package:defensa_civil/Screens/Defensa%20Civil/inicio.dart';
 import 'package:defensa_civil/Screens/Defensa%20Civil/mapa_pop_up.dart';
@@ -58,7 +59,7 @@ class _ScreenHomeScreenState extends State<ScreenHomeScreen>
     const InicioScreen(),
     const NoticiasScreen(),
     const GaleriaImagenesScreen(),
-    const AlberguesScreen(),
+    const NavigatorAlberguesScreen(),
     //const MapaPopUpScreen(),
     const MedidasPreventicasScreen(),
     //const MimebrosScreen(),
@@ -103,8 +104,10 @@ class _ScreenHomeScreenState extends State<ScreenHomeScreen>
                   scale: _scaleAnimationTwo.value * 1.05,
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(24),
-                      child: screens[Provider.of<MenuIndexProvider>(context)
-                          .selectedIndex]))),
+                      child: IndexedStack(
+                        children: [screens[Provider.of<MenuIndexProvider>(context)
+                            .selectedIndex]],
+                      )))),
         ),
         AnimatedPositioned(
           duration: const Duration(milliseconds: 300),
