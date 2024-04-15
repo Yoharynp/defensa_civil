@@ -83,7 +83,7 @@ class _ScreenHomeScreenState extends State<ScreenHomeScreen>
             const MedidasPreventicasScreen(),
             const VoluntarioScreen(),
             const AcercaDeScreen(),
-            const MapaPopUpScreen(),
+            const MapaSituacionesScreen(),
             const MisSituacionesScreen(),
             const ReportarSitaucionesScreen(),
             const CambiarContrasenaScreen(),
