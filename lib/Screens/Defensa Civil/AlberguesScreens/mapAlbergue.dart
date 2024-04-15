@@ -41,8 +41,8 @@ class _MapAlberguesScreenState extends State<MapAlberguesScreen> {
       body: FlutterMap(
         options: MapOptions(
           initialCenter: LatLng(
-              18.7357, -70.1627), // Centra el mapa en coordenadas específicas
-          initialZoom: 10.0, // Zoom inicial del mapa
+              18.7357, -70.1627), 
+          initialZoom: 10.0, 
         ),
         children: [
           TileLayer(
