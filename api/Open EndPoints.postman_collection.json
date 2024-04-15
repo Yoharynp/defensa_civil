@@ -1,0 +1,278 @@
+{
+	"info": {
+		"_postman_id": "1088c945-7908-489d-a4ea-6ea6d70a7f32",
+		"name": "Open EndPoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26385426"
+	},
+	"item": [
+		{
+			"name": "Create user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "cedula",
+							"value": "400-0000000-1",
+							"type": "text"
+						},
+						{
+							"key": "nombre",
+							"value": "Jesús",
+							"type": "text"
+						},
+						{
+							"key": "apellido",
+							"value": "de nazaret",
+							"type": "text"
+						},
+						{
+							"key": "clave",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "correo",
+							"value": "prueba@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "telefono",
+							"value": "(809)-000-0001",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://adamix.net/defensa_civil/def/registro.php",
+					"protocol": "https",
+					"host": [
+						"adamix",
+						"net"
+					],
+					"path": [
+						"defensa_civil",
+						"def",
+						"registro.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "cedula",
+							"value": "400-0000000-1",
+							"type": "text"
+						},
+						{
+							"key": "clave",
+							"value": "5033",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://adamix.net/defensa_civil/def/iniciar_sesion.php",
+					"protocol": "https",
+					"host": [
+						"adamix",
+						"net"
+					],
+					"path": [
+						"defensa_civil",
+						"def",
+						"iniciar_sesion.php"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Servicios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://adamix.net/defensa_civil/def/servicios.php",
+					"protocol": "https",
+					"host": [
+						"adamix",
+						"net"
+					],
+					"path": [
+						"defensa_civil",
+						"def",
+						"servicios.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Noticias",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://adamix.net/defensa_civil/def/noticias.php",
+					"protocol": "https",
+					"host": [
+						"adamix",
+						"net"
+					],
+					"path": [
+						"defensa_civil",
+						"def",
+						"noticias.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Videos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://adamix.net/defensa_civil/def/videos.php",
+					"protocol": "https",
+					"host": [
+						"adamix",
+						"net"
+					],
+					"path": [
+						"defensa_civil",
+						"def",
+						"videos.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Albergues",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://adamix.net/defensa_civil/def/albergues.php",
+					"protocol": "https",
+					"host": [
+						"adamix",
+						"net"
+					],
+					"path": [
+						"defensa_civil",
+						"def",
+						"albergues.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Medidas preventivas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://adamix.net/defensa_civil/def/medidas_preventivas.php",
+					"protocol": "https",
+					"host": [
+						"adamix",
+						"net"
+					],
+					"path": [
+						"defensa_civil",
+						"def",
+						"medidas_preventivas.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Miembros",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://adamix.net/defensa_civil/def/miembros.php",
+					"protocol": "https",
+					"host": [
+						"adamix",
+						"net"
+					],
+					"path": [
+						"defensa_civil",
+						"def",
+						"miembros.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recuperar clave",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "cedula",
+							"value": "400-0000000-1",
+							"type": "text"
+						},
+						{
+							"key": "correo",
+							"value": "prueba@gmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://adamix.net/defensa_civil/def/recuperar_clave.php",
+					"protocol": "https",
+					"host": [
+						"adamix",
+						"net"
+					],
+					"path": [
+						"defensa_civil",
+						"def",
+						"recuperar_clave.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

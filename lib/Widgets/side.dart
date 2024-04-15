@@ -1,3 +1,4 @@
+import 'package:defensa_civil/Widgets/auth_provider.dart';
 import 'package:defensa_civil/Widgets/elemntos.dart';
 import 'package:defensa_civil/Widgets/provider.dart';
 import 'package:flutter/material.dart';
@@ -20,13 +21,15 @@ class _SideMenuScreenState extends State<SideMenuScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
+    final hasToken = authProvider.token != null;
     return Scaffold(
       body: Stack(
         children: [
           Container(
             width: 288,
             height: double.infinity,
-            color: Colors.blueGrey[900],
+            color: Color(0xff0a4271),
             child: SafeArea(
               child: Column(
                 children: [
@@ -55,7 +58,7 @@ class _SideMenuScreenState extends State<SideMenuScreen> {
                   Expanded(
                     child: ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: elementos.length,
+                      itemCount: getElements(hasToken).length,
                       itemBuilder: (BuildContext context, int index) {
                         return GestureDetector(
                           onTap: () {
@@ -75,7 +78,7 @@ class _SideMenuScreenState extends State<SideMenuScreen> {
                               height: 50,
                               child: Stack(
                                 children: [
-                                  elementos[index],
+                                  getElements(hasToken)[index],
                                   AnimatedContainer(
                                     margin: const EdgeInsets.symmetric(
                                         horizontal: 11),
@@ -84,7 +87,7 @@ class _SideMenuScreenState extends State<SideMenuScreen> {
                                     width: _selectedIndex == index ? 288 : 0,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
-                                      color: Colors.blue.withOpacity(0.5),
+                                      color: Colors.white.withOpacity(0.5),
                                     ),
                                   )
                                 ],
