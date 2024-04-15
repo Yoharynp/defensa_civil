@@ -84,8 +84,7 @@ class _ScreenHomeScreenState extends State<ScreenHomeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff0a4271),
-      body: Stack(
-        children: [
+      body: Stack(children: [
         AnimatedPositioned(
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut,
