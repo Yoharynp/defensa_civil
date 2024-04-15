@@ -79,7 +79,7 @@ class _ScreenHomeScreenState extends State<ScreenHomeScreen>
           screens = [
             const NoticiasEspecificasScreen(),
             const NoticiasScreen(),
-            const GaleriaImagenesScreen(),
+            const GaleriaScreen(),
             const NavigatorAlberguesScreen(),
             const MedidasPreventicasScreen(),
             const VoluntarioScreen(),
@@ -95,7 +95,7 @@ class _ScreenHomeScreenState extends State<ScreenHomeScreen>
           screens = [
             const InicioScreen(),
             const NoticiasScreen(),
-            const GaleriaImagenesScreen(),
+            const GaleriaScreen(),
             const NavigatorAlberguesScreen(),
             const MedidasPreventicasScreen(),
             const VoluntarioScreen(),
