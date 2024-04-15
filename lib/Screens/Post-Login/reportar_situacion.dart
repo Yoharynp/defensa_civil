@@ -32,7 +32,10 @@ class _ReportarSitaucionesScreenState extends State<ReportarSitaucionesScreen> {
     if (pickedFile != null) {
       setState(() {
         _selectedImage = File(pickedFile.path);
-        _base64Image = base64Encode(_selectedImage!.readAsBytesSync());
+        // _base64Image = base64Encode(_selectedImage!.readAsBytesSync());
+
+        final bytes = File(_selectedImage!.path).readAsBytesSync();
+        String _base64Image = "data:image/png;base64," + base64Encode(bytes);
       });
     }
   }
@@ -43,7 +46,9 @@ class _ReportarSitaucionesScreenState extends State<ReportarSitaucionesScreen> {
     if (pickedFile != null) {
       setState(() {
         _selectedImage = File(pickedFile.path);
-        _base64Image = base64Encode(_selectedImage!.readAsBytesSync());
+        //_base64Image = base64Encode(_selectedImage!.readAsBytesSync());
+        final bytes = File(_selectedImage!.path).readAsBytesSync();
+        String _base64Image = "data:image/png;base64," + base64Encode(bytes);
       });
     }
   }
@@ -82,13 +87,13 @@ class _ReportarSitaucionesScreenState extends State<ReportarSitaucionesScreen> {
     final String title = _titleController.text;
     final String description = _descriptionController.text;
     FormData formData = FormData.fromMap({
-        'titulo': title,
-        'descripcion': description,
-        'foto': _base64Image,	
-        'latitud': _latitude,
-        'longitud': _longitude,
-        'token': token
-      });
+      'titulo': title,
+      'descripcion': description,
+      'foto': _base64Image,
+      'latitud': _latitude,
+      'longitud': _longitude,
+      'token': token
+    });
     final response = await dio.post(
         'https://adamix.net/defensa_civil/def/nueva_situacion.php',
         data: formData);
@@ -153,18 +158,16 @@ class _ReportarSitaucionesScreenState extends State<ReportarSitaucionesScreen> {
                 height: 600,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.5),
-                      spreadRadius: 3,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3),
-                    ),
-                  
-                  ]
-                ),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.5),
+                        spreadRadius: 3,
+                        blurRadius: 7,
+                        offset: const Offset(0, 3),
+                      ),
+                    ]),
                 child: Column(
                   children: [
                     Container(
@@ -218,7 +221,10 @@ class _ReportarSitaucionesScreenState extends State<ReportarSitaucionesScreen> {
                           ),
                           child: TextButton(
                             onPressed: _pickImage,
-                            child: Text('Galeria', style: TextStyle(color: Colors.black),),
+                            child: Text(
+                              'Galeria',
+                              style: TextStyle(color: Colors.black),
+                            ),
                           ),
                         ),
                         Container(
@@ -229,7 +235,10 @@ class _ReportarSitaucionesScreenState extends State<ReportarSitaucionesScreen> {
                           ),
                           child: TextButton(
                             onPressed: _takePicture,
-                            child: Text('Foto', style: TextStyle(color: Colors.black),),
+                            child: Text(
+                              'Foto',
+                              style: TextStyle(color: Colors.black),
+                            ),
                           ),
                         ),
                       ],
@@ -238,24 +247,30 @@ class _ReportarSitaucionesScreenState extends State<ReportarSitaucionesScreen> {
                     Container(
                       decoration: BoxDecoration(
                         color: Color(0xffEE782E),
-                            border: Border.all(color: Colors.grey, width: 3),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
+                        border: Border.all(color: Colors.grey, width: 3),
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
                       child: TextButton(
                         onPressed: _getLocation,
-                        child: Text('Obtener Ubicación', style: TextStyle(color: Colors.black),),
+                        child: Text(
+                          'Obtener Ubicación',
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ),
                     ),
                     SizedBox(height: 16.0),
                     Container(
                       decoration: BoxDecoration(
-                        color:  Color(0xffEE782E),
-                            border: Border.all(color: Colors.grey, width: 3),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
+                        color: Color(0xffEE782E),
+                        border: Border.all(color: Colors.grey, width: 3),
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
                       child: TextButton(
                         onPressed: _submitReport,
-                        child: Text('Enviar Reporte', style: TextStyle(color: Colors.black),),
+                        child: Text(
+                          'Enviar Reporte',
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ),
                     ),
                   ],

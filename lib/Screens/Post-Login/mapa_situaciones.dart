@@ -82,10 +82,12 @@ class _MapaSituacionesScreenState extends State<MapaSituacionesScreen> {
         ),
       );
     }
-    setState(() {}); // Actualiza el estado para reflejar los marcadores en el mapa
+    setState(
+        () {}); // Actualiza el estado para reflejar los marcadores en el mapa
   }
 
-  void _showSituacionDetails(BuildContext context, Map<String, dynamic> situacion) {
+  void _showSituacionDetails(
+      BuildContext context, Map<String, dynamic> situacion) {
     showDialog(
       context: context,
       builder: (context) {
@@ -116,8 +118,7 @@ class _MapaSituacionesScreenState extends State<MapaSituacionesScreen> {
     return Scaffold(
       body: FlutterMap(
         options: MapOptions(
-          initialCenter: LatLng(
-              18.7357, -70.1627), 
+          initialCenter: LatLng(18.7357, -70.1627),
           initialZoom: 10.0, // Nivel de zoom inicial
         ),
         children: [
