@@ -13,6 +13,7 @@ import 'package:defensa_civil/Screens/Extras/login.dart';
 import 'package:defensa_civil/Screens/Extras/logout.dart';
 import 'package:defensa_civil/Screens/Post-Login/mapa_situaciones.dart';
 import 'package:defensa_civil/Screens/Post-Login/mis_situaciones.dart';
+import 'package:defensa_civil/Screens/Post-Login/noticias_especificas.dart';
 import 'package:defensa_civil/Screens/Post-Login/reportar_situacion.dart';
 import 'package:defensa_civil/Screens/Post-Login/cambiar_contrasena.dart';
 import 'package:defensa_civil/Widgets/auth_provider.dart';
@@ -75,7 +76,7 @@ class _ScreenHomeScreenState extends State<ScreenHomeScreen>
       List<Widget> screens;
         if (hasToken) {
           screens = [
-            const InicioScreen(),
+            const NoticiasEspecificasScreen(),
             const NoticiasScreen(),
             const GaleriaImagenesScreen(),
             const NavigatorAlberguesScreen(),
