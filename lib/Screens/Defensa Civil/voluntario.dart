@@ -10,7 +10,7 @@ class VoluntarioScreen extends StatefulWidget {
 }
 
 class _VoluntarioScreenState extends State<VoluntarioScreen> {
-  late TextEditingController _cedulaController;
+  late TextEditingController _claveController;
   late TextEditingController _nombreController;
   late TextEditingController _apellidoController;
   late TextEditingController _claveController;
@@ -20,7 +20,7 @@ class _VoluntarioScreenState extends State<VoluntarioScreen> {
   @override
   void initState() {
     super.initState();
-    _cedulaController = TextEditingController();
+    _claveController = TextEditingController();
     _nombreController = TextEditingController();
     _apellidoController = TextEditingController();
     _claveController = TextEditingController();
@@ -30,7 +30,7 @@ class _VoluntarioScreenState extends State<VoluntarioScreen> {
 
   @override
   void dispose() {
-    _cedulaController.dispose();
+    _claveController.dispose();
     _nombreController.dispose();
     _apellidoController.dispose();
     _correoController.dispose();
@@ -39,7 +39,7 @@ class _VoluntarioScreenState extends State<VoluntarioScreen> {
   }
 
   Future<void> _submitForm() async {
-    final String cedula = _cedulaController.text;
+    final String cedula = _claveController.text;
     final String nombre = _nombreController.text;
     final String apellido = _apellidoController.text;
     final String clave = _claveController.text;
@@ -130,18 +130,34 @@ class _VoluntarioScreenState extends State<VoluntarioScreen> {
                   ),
                 ),
               ),
-              Container(
-                height: 570,
-                width: 350,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black,
-                      spreadRadius: 2,
-                      blurRadius: 10,
-                      blurStyle: BlurStyle.solid,
+            ),
+            Container(
+              height: 500,
+              width: 350,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.white,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Formulario de registro
+                  _buildInputField('Cédula', _claveController),
+                  _buildInputField('Nombre', _nombreController),
+                  _buildInputField('Apellido', _apellidoController),
+                  _buildInputField('Correo', _correoController),
+                  _buildInputField('Teléfono', _telefonoController),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: _submitForm,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromRGBO(238, 120, 46, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: const BorderSide(color: Colors.black, width: 2),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 40),
                     ),
                   ]
                 ),
