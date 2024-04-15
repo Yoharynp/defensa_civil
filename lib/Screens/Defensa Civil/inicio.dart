@@ -48,7 +48,6 @@ class _InicioScreenState extends State<InicioScreen>
       _updateAudioPosition(duration);
     });
 
-    // Obtiene la duración total del audio una vez que se carga
     audioPlayer.onDurationChanged.listen((Duration duration) {
       _updateAudioDuration(duration);
     });
@@ -80,7 +79,6 @@ class _InicioScreenState extends State<InicioScreen>
           Container(
               height: 370,
               width: double.infinity,
-              //margin: EdgeInsets.symmetric(horizontal: 9),
               decoration: BoxDecoration(
                 color: Color(0xffEE782E),
                 borderRadius: BorderRadius.only(
@@ -276,8 +274,7 @@ class _InicioScreenState extends State<InicioScreen>
               duration: Duration(milliseconds: 300),
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: FutureBuilder(
-                future: Future.delayed(
-                    Duration(milliseconds: 900)), // Agregar un pequeño retraso
+                future: Future.delayed(Duration(milliseconds: 900)),
                 builder: (context, snapshot) {
                   return isSelect == 0
                       ? _buildIinicio()
@@ -317,7 +314,6 @@ class _InicioScreenState extends State<InicioScreen>
           ),
         ),
         SizedBox(height: 20.0),
-        // Slider para cambiar las imágenes
         Slider(
           value: currentIndex.toDouble(),
           min: 0,
@@ -405,7 +401,6 @@ class _InicioScreenState extends State<InicioScreen>
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            // Aquí puedes agregar el resto del texto
                                             'Origen y Evolución de la Defensa Civil\n\n'
                                             '¿Cuándo comienza la Defensa Civil en nuestro país?\n\n'
                                             'En julio de 1939, con la creación del Comando de Defensa Antiaérea del Ejército, pasando por distintas etapas hasta la actualidad.\n\n'
@@ -551,7 +546,6 @@ class _InicioScreenState extends State<InicioScreen>
   Widget _buildMiembros() {
     return Container(
       color: Colors.white,
-      //padding: const EdgeInsets.all(35),
       child: ListView.builder(
         itemCount: _miembros.length,
         itemBuilder: (BuildContext context, int index) {
@@ -672,9 +666,9 @@ class _InicioScreenState extends State<InicioScreen>
 
   @override
   void dispose() {
-    _pauseAudio(); 
-    _animationController.dispose(); 
-    audioPlayer.dispose(); 
+    _pauseAudio();
+    _animationController.dispose();
+    audioPlayer.dispose();
     super.dispose();
   }
 }

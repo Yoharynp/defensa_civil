@@ -18,8 +18,6 @@ class _NoticiasEspecificasScreenState extends State<NoticiasEspecificasScreen> {
   late Future<List<Map<String, dynamic>>> _noticiasFuture;
   late Map<String, dynamic> _selectedNoticia;
 
-  
-
   @override
   void initState() {
     super.initState();
@@ -34,7 +32,6 @@ class _NoticiasEspecificasScreenState extends State<NoticiasEspecificasScreen> {
         Uri.parse(
             'https://adamix.net/defensa_civil/def/noticias_especificas.php'),
         body: {
-          //cambiar token al real
           'token': token,
         });
 
@@ -48,7 +45,6 @@ class _NoticiasEspecificasScreenState extends State<NoticiasEspecificasScreen> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: Color.fromRGBO(238, 120, 46, 1),
       body: Column(
@@ -103,9 +99,7 @@ class _NoticiasEspecificasScreenState extends State<NoticiasEspecificasScreen> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onChanged: (value) {
-                        // Lógica de búsqueda
-                      },
+                      onChanged: (value) {},
                     ),
                     SizedBox(height: 30),
                     Expanded(

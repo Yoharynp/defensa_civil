@@ -37,7 +37,6 @@ class _MiembrosScreenState extends State<MiembrosScreen> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          // Parte superior de la pantalla
           Container(
             height: MediaQuery.of(context).size.height * 0.35,
             decoration: const BoxDecoration(
@@ -130,7 +129,6 @@ class _MiembrosScreenState extends State<MiembrosScreen> {
     );
   }
 
-  // Función para truncar el texto si excede el límite de caracteres
   String _truncateText(String text, int maxLength) {
     return (text.length <= maxLength)
         ? text

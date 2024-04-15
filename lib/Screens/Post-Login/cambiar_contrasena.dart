@@ -54,7 +54,6 @@ class _CambiarContrasenaScreenState extends State<CambiarContrasenaScreen> {
     final response = await http.post(
       Uri.parse('https://adamix.net/defensa_civil/def/cambiar_clave.php'),
       body: {
-        //cambiar token al real
         'token': token,
         'clave_anterior': claveAnterior,
         'clave_nueva': claveNueva
@@ -87,7 +86,6 @@ class _CambiarContrasenaScreenState extends State<CambiarContrasenaScreen> {
               );
             });
       } else {
-        // Aquí puedes manejar el caso en que ocurra un error en el registro
         showDialog(
           // ignore: use_build_context_synchronously
           context: context,
@@ -278,17 +276,16 @@ class _CambiarContrasenaScreenState extends State<CambiarContrasenaScreen> {
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 30),
                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black,
-                                spreadRadius: 2,
-                                blurRadius: 10,
-                                blurStyle: BlurStyle.solid,
-                              ),
-                            ]
-                          ),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  spreadRadius: 2,
+                                  blurRadius: 10,
+                                  blurStyle: BlurStyle.solid,
+                                ),
+                              ]),
                           child: TextButton(
                             onPressed: () {
                               setState(() {
@@ -305,21 +302,19 @@ class _CambiarContrasenaScreenState extends State<CambiarContrasenaScreen> {
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 30),
                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black,
-                                spreadRadius: 2,
-                                blurRadius: 10,
-                                blurStyle: BlurStyle.solid,
-                              ),
-                            ]
-                          ),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  spreadRadius: 2,
+                                  blurRadius: 10,
+                                  blurStyle: BlurStyle.solid,
+                                ),
+                              ]),
                           child: TextButton(
                             onPressed: () {
-                              Navigator
-                                  .pop(context); 
+                              Navigator.pop(context);
                             },
                             child: Text('Cancelar'),
                           ),

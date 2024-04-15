@@ -52,7 +52,7 @@ class _VoluntarioScreenState extends State<VoluntarioScreen> {
         'cedula': cedula,
         'nombre': nombre,
         'apellido': apellido,
-        'clave' : clave,
+        'clave': clave,
         'correo': correo,
         'telefono': telefono,
       },
@@ -64,23 +64,24 @@ class _VoluntarioScreenState extends State<VoluntarioScreen> {
       final String mensaje = jsonData['mensaje'];
 
       if (exito) {
-        showDialog(context: context, builder: (context) {
-          return AlertDialog(
-            title: const Text('Éxito'),
-            content: Text(mensaje),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          );
-        });
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: const Text('Éxito'),
+                content: Text(mensaje),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('OK'),
+                  ),
+                ],
+              );
+            });
       } else {
         showDialog(
-          // ignore: use_build_context_synchronously
           context: context,
           builder: (context) {
             return AlertDialog(
@@ -143,16 +144,13 @@ class _VoluntarioScreenState extends State<VoluntarioScreen> {
                   ),
                 ),
               ),
-            
-            
-            Container(
-              height: 570,
-              width: 350,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.white,
-              ),                
-                
+              Container(
+                height: 570,
+                width: 350,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.white,
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

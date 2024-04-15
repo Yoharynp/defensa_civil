@@ -46,7 +46,11 @@ class _NoticiasScreenState extends State<NoticiasScreen> {
             width: 200,
             decoration: BoxDecoration(
               boxShadow: [
-                BoxShadow(color: Colors.black, spreadRadius: 2, blurRadius: 10, blurStyle: BlurStyle.solid),
+                BoxShadow(
+                    color: Colors.black,
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    blurStyle: BlurStyle.solid),
               ],
               borderRadius: BorderRadius.circular(20),
               color: Colors.white,
@@ -85,23 +89,24 @@ class _NoticiasScreenState extends State<NoticiasScreen> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onChanged: (value) {
-                        // Lógica de búsqueda
-                      },
+                      onChanged: (value) {},
                     ),
                     SizedBox(height: 30),
                     Expanded(
                       child: FutureBuilder<List<Map<String, dynamic>>>(
                         future: _noticiasFuture,
                         builder: (context, snapshot) {
-                          if (snapshot.connectionState == ConnectionState.waiting) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
                             return Center(child: CircularProgressIndicator());
                           } else if (snapshot.hasError) {
-                            return Center(child: Text('Error: ${snapshot.error}'));
+                            return Center(
+                                child: Text('Error: ${snapshot.error}'));
                           } else {
                             final noticias = snapshot.data ?? [];
                             return GridView.builder(
-                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
                                 crossAxisSpacing: 10,
                                 mainAxisSpacing: 10,
@@ -129,7 +134,8 @@ class _NoticiasScreenState extends State<NoticiasScreen> {
                                       ],
                                     ),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Expanded(
                                           child: ClipRRect(

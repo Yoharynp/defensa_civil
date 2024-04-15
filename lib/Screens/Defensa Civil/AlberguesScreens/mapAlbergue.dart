@@ -19,7 +19,7 @@ class _MapAlberguesScreenState extends State<MapAlberguesScreen> {
   void initState() {
     super.initState();
     _albergues = [];
-    _fetchData(); 
+    _fetchData();
   }
 
   Future<void> _fetchData() async {
@@ -40,9 +40,8 @@ class _MapAlberguesScreenState extends State<MapAlberguesScreen> {
     return Scaffold(
       body: FlutterMap(
         options: MapOptions(
-          initialCenter: LatLng(
-              18.7357, -70.1627), 
-          initialZoom: 10.0, 
+          initialCenter: LatLng(18.7357, -70.1627),
+          initialZoom: 10.0,
         ),
         children: [
           TileLayer(
@@ -50,7 +49,7 @@ class _MapAlberguesScreenState extends State<MapAlberguesScreen> {
             subdomains: ['a', 'b', 'c'],
           ),
           MarkerLayer(
-            markers: _buildMarkers(), // Construye los marcadores en el mapa
+            markers: _buildMarkers(),
           ),
         ],
       ),

@@ -38,7 +38,6 @@ class _GaleriaScreenState extends State<GaleriaScreen> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          // Parte superior de la pantalla
           Container(
             height: MediaQuery.of(context).size.height * 0.35,
             decoration: const BoxDecoration(
@@ -74,7 +73,6 @@ class _GaleriaScreenState extends State<GaleriaScreen> {
               ),
             ),
           ),
-          // Contenedor para mostrar los videos
           Expanded(
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -110,8 +108,7 @@ class _GaleriaScreenState extends State<GaleriaScreen> {
                         const SizedBox(height: 10),
                         Container(
                           decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(10), // Bordes redondeados
+                            borderRadius: BorderRadius.circular(10),
                             color: const Color.fromRGBO(255, 121, 38, 1),
                           ),
                           width: MediaQuery.of(context).size.width * 0.8,
