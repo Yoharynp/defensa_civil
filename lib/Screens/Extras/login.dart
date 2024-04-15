@@ -1,6 +1,10 @@
+import 'package:defensa_civil/Screens/Extras/funciton_login.dart';
+import 'package:defensa_civil/Widgets/provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -10,6 +14,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController cedulaController = TextEditingController();
+  TextEditingController claveController = TextEditingController();
+  AuthService authService = AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,6 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     child: TextField(
+                      controller: cedulaController,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.only(left: 50, bottom: 10),
                         border: InputBorder.none,
@@ -105,6 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     child: TextField(
+                      controller: claveController,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.only(left: 50, bottom: 10),
                         border: InputBorder.none,
@@ -131,7 +140,33 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: FittedBox(
                       fit: BoxFit.contain,
                       child: TextButton(
-                        onPressed: () => {},
+                        onPressed: ()async {
+                          String? token = await authService.getTokenAndLogin(
+                            cedulaController.text,
+                            claveController.text,
+                            context
+                          );
+                          if (token != null) {
+                            Provider.of<MenuIndexProvider>(context, listen: false).setIndex(0);
+                          }else{
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: Text('Error'),
+                                content: Text('Usuario o contraseña incorrectos'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Aceptar'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
+                          
+                        },
                         child: Text(
                           'Ingresar',
                           style: GoogleFonts.inter(

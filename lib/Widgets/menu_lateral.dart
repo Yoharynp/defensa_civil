@@ -10,10 +10,12 @@ import 'package:defensa_civil/Screens/Defensa%20Civil/noticias.dart';
 import 'package:defensa_civil/Screens/Defensa%20Civil/voluntario.dart';
 import 'package:defensa_civil/Screens/Extras/acercade.dart';
 import 'package:defensa_civil/Screens/Extras/login.dart';
+import 'package:defensa_civil/Screens/Extras/logout.dart';
 import 'package:defensa_civil/Screens/Post-Login/mapa_situaciones.dart';
 import 'package:defensa_civil/Screens/Post-Login/mis_situaciones.dart';
 import 'package:defensa_civil/Screens/Post-Login/reportar_situacion.dart';
 import 'package:defensa_civil/Screens/Post-Login/cambiar_contrasena.dart';
+import 'package:defensa_civil/Widgets/auth_provider.dart';
 import 'package:defensa_civil/Widgets/mnu_button.dart';
 import 'package:defensa_civil/Widgets/provider.dart';
 import 'package:defensa_civil/Widgets/side.dart';
@@ -33,6 +35,8 @@ class _ScreenHomeScreenState extends State<ScreenHomeScreen>
   late AnimationController _controller = _controller;
   late Animation<double> _scaleAnimation = _scaleAnimation;
   late Animation<double> _scaleAnimationTwo = _scaleAnimationTwo;
+
+
 
   @override
   void initState() {
@@ -55,22 +59,6 @@ class _ScreenHomeScreenState extends State<ScreenHomeScreen>
     super.dispose();
   }
 
-  List<Widget> screens = <Widget>[
-    const InicioScreen(),
-    const NoticiasScreen(),
-    const GaleriaImagenesScreen(),
-    const NavigatorAlberguesScreen(),
-    //const MapaPopUpScreen(),
-    const MedidasPreventicasScreen(),
-    //const MimebrosScreen(),
-    const VoluntarioScreen(),
-    const AcercaDeScreen(),
-    const LoginScreen(),
-    // const ReportarSitaucionesScreen(),
-    // const MisSituacionesScreen(),
-    // const MapaSituacionesScreen(),
-    // const CambiarContrasenaScreen(),
-  ];
 
   int currentIndex = 0;
 
@@ -82,6 +70,37 @@ class _ScreenHomeScreenState extends State<ScreenHomeScreen>
 
   @override
   Widget build(BuildContext context) {
+      final authProvider = Provider.of<AuthProvider>(context);
+      final hasToken = authProvider.token != null;
+      List<Widget> screens;
+        if (hasToken) {
+          screens = [
+            const InicioScreen(),
+            const NoticiasScreen(),
+            const GaleriaImagenesScreen(),
+            const NavigatorAlberguesScreen(),
+            const MedidasPreventicasScreen(),
+            const VoluntarioScreen(),
+            const AcercaDeScreen(),
+            const MapaPopUpScreen(),
+            const MisSituacionesScreen(),
+            const ReportarSitaucionesScreen(),
+            const CambiarContrasenaScreen(),
+            const LogOutScreen(),
+
+          ];
+        } else {
+          screens = [
+            const InicioScreen(),
+            const NoticiasScreen(),
+            const GaleriaImagenesScreen(),
+            const NavigatorAlberguesScreen(),
+            const MedidasPreventicasScreen(),
+            const VoluntarioScreen(),
+            const AcercaDeScreen(),
+            const LoginScreen(),
+          ];
+        }
     return Scaffold(
       backgroundColor: Color(0xff0a4271),
       body: Stack(children: [
@@ -105,8 +124,7 @@ class _ScreenHomeScreenState extends State<ScreenHomeScreen>
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(24),
                       child: IndexedStack(
-                        children: [screens[Provider.of<MenuIndexProvider>(context)
-                            .selectedIndex]],
+                        children: [screens[Provider.of<MenuIndexProvider>(context).selectedIndex]],
                       )))),
         ),
         AnimatedPositioned(
