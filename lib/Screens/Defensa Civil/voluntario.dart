@@ -10,7 +10,7 @@ class VoluntarioScreen extends StatefulWidget {
 }
 
 class _VoluntarioScreenState extends State<VoluntarioScreen> {
-  late TextEditingController _cedulaController;
+  late TextEditingController _claveController;
   late TextEditingController _nombreController;
   late TextEditingController _apellidoController;
   late TextEditingController _correoController;
@@ -19,7 +19,7 @@ class _VoluntarioScreenState extends State<VoluntarioScreen> {
   @override
   void initState() {
     super.initState();
-    _cedulaController = TextEditingController();
+    _claveController = TextEditingController();
     _nombreController = TextEditingController();
     _apellidoController = TextEditingController();
     _correoController = TextEditingController();
@@ -28,7 +28,7 @@ class _VoluntarioScreenState extends State<VoluntarioScreen> {
 
   @override
   void dispose() {
-    _cedulaController.dispose();
+    _claveController.dispose();
     _nombreController.dispose();
     _apellidoController.dispose();
     _correoController.dispose();
@@ -37,7 +37,7 @@ class _VoluntarioScreenState extends State<VoluntarioScreen> {
   }
 
   Future<void> _submitForm() async {
-    final String cedula = _cedulaController.text;
+    final String cedula = _claveController.text;
     final String nombre = _nombreController.text;
     final String apellido = _apellidoController.text;
     final String correo = _correoController.text;
@@ -137,7 +137,7 @@ class _VoluntarioScreenState extends State<VoluntarioScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // Formulario de registro
-                  _buildInputField('Cédula', _cedulaController),
+                  _buildInputField('Cédula', _claveController),
                   _buildInputField('Nombre', _nombreController),
                   _buildInputField('Apellido', _apellidoController),
                   _buildInputField('Correo', _correoController),
