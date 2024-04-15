@@ -13,6 +13,7 @@ class _VoluntarioScreenState extends State<VoluntarioScreen> {
   late TextEditingController _cedulaController;
   late TextEditingController _nombreController;
   late TextEditingController _apellidoController;
+  late TextEditingController _claveController;
   late TextEditingController _correoController;
   late TextEditingController _telefonoController;
 
@@ -22,6 +23,7 @@ class _VoluntarioScreenState extends State<VoluntarioScreen> {
     _cedulaController = TextEditingController();
     _nombreController = TextEditingController();
     _apellidoController = TextEditingController();
+    _claveController = TextEditingController();
     _correoController = TextEditingController();
     _telefonoController = TextEditingController();
   }
@@ -40,6 +42,7 @@ class _VoluntarioScreenState extends State<VoluntarioScreen> {
     final String cedula = _cedulaController.text;
     final String nombre = _nombreController.text;
     final String apellido = _apellidoController.text;
+    final String clave = _claveController.text;
     final String correo = _correoController.text;
     final String telefono = _telefonoController.text;
 
@@ -49,6 +52,7 @@ class _VoluntarioScreenState extends State<VoluntarioScreen> {
         'cedula': cedula,
         'nombre': nombre,
         'apellido': apellido,
+        'clave' : clave,
         'correo': correo,
         'telefono': telefono,
       },
@@ -60,9 +64,8 @@ class _VoluntarioScreenState extends State<VoluntarioScreen> {
       final String mensaje = jsonData['mensaje'];
 
       if (exito) {
-        // Aquí puedes manejar el éxito del registro
+        print('Registro exitoso');
       } else {
-        // Aquí puedes manejar el caso en que ocurra un error en el registro
         showDialog(
           // ignore: use_build_context_synchronously
           context: context,
@@ -92,77 +95,88 @@ class _VoluntarioScreenState extends State<VoluntarioScreen> {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(238, 120, 46, 1),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: 70,
-              width: 200,
-              decoration: BoxDecoration(
-                boxShadow: const [
-                  BoxShadow(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 70,
+                width: 200,
+                decoration: BoxDecoration(
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black,
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      blurStyle: BlurStyle.solid,
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                  border: Border.all(
                     color: Colors.black,
-                    spreadRadius: 2,
-                    blurRadius: 10,
-                    blurStyle: BlurStyle.solid,
-                  ),
-                ],
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
-                border: Border.all(
-                  color: Colors.black,
-                  width: 2,
-                ),
-              ),
-              margin: const EdgeInsets.only(bottom: 20),
-              child: const Center(
-                child: Text(
-                  "Voluntarios",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                    color: Colors.black,
+                    width: 2,
                   ),
                 ),
+                margin: const EdgeInsets.only(bottom: 20),
+                child: const Center(
+                  child: Text(
+                    "Voluntarios",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
               ),
-            ),
-            Container(
-              height: 500,
-              width: 350,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.white,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Formulario de registro
-                  _buildInputField('Cédula', _cedulaController),
-                  _buildInputField('Nombre', _nombreController),
-                  _buildInputField('Apellido', _apellidoController),
-                  _buildInputField('Correo', _correoController),
-                  _buildInputField('Teléfono', _telefonoController),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: _submitForm,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromRGBO(238, 120, 46, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        side: const BorderSide(color: Colors.black, width: 2),
+              Container(
+                height: 570,
+                width: 350,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black,
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      blurStyle: BlurStyle.solid,
+                    ),
+                  ]
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Formulario de registro
+                    _buildInputField('Cédula', _cedulaController),
+                    _buildInputField('Nombre', _nombreController),
+                    _buildInputField('Apellido', _apellidoController),
+                    _buildInputField('Clave', _claveController),
+                    _buildInputField('Correo', _correoController),
+                    _buildInputField('Teléfono', _telefonoController),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: _submitForm,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromRGBO(238, 120, 46, 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          side: const BorderSide(color: Colors.black, width: 2),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 40),
                       ),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 40),
+                      child: const Text(
+                        'Enviar',
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
                     ),
-                    child: const Text(
-                      'Enviar',
-                      style: TextStyle(fontSize: 18, color: Colors.white),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
