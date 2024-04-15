@@ -56,7 +56,7 @@ class _ScreenHomeScreenState extends State<ScreenHomeScreen>
   List<Widget> screens = <Widget>[
     const InicioScreen(),
     const NoticiasScreen(),
-    const GaleriaImagenesScreen(),
+    const GaleriaScreen(),
     const AlberguesScreen(),
     const MapaPopUpScreen(),
     const MedidasPreventicasScreen(),
