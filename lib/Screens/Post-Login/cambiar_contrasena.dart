@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'package:defensa_civil/Screens/Extras/funciton_login.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import "package:http/http.dart" as http;
 
 import 'package:flutter/material.dart';
@@ -45,12 +48,14 @@ class _CambiarContrasenaScreenState extends State<CambiarContrasenaScreen> {
   Future<void> _submitForm() async {
     final String claveAnterior = _claveController.text;
     final String claveNueva = _claveNuevaController.text;
+    AuthService authService = AuthService();
+    final token = await authService.getToken();
 
     final response = await http.post(
       Uri.parse('https://adamix.net/defensa_civil/def/cambiar_clave.php'),
       body: {
         //cambiar token al real
-        'token': "5588ab57779a9c415bdc56b5371f6caa",
+        'token': token,
         'clave_anterior': claveAnterior,
         'clave_nueva': claveNueva
       },
@@ -60,9 +65,27 @@ class _CambiarContrasenaScreenState extends State<CambiarContrasenaScreen> {
       final jsonData = json.decode(response.body);
       final bool exito = jsonData['exito'];
       final String mensaje = jsonData['mensaje'];
+      if (exito) {
+        authService.setNewPassword(claveNueva);
+      }
 
       if (exito) {
-        // Aquí puedes manejar el éxito del registro
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: const Text('Exito'),
+                content: Text(mensaje),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('OK'),
+                  ),
+                ],
+              );
+            });
       } else {
         // Aquí puedes manejar el caso en que ocurra un error en el registro
         showDialog(
@@ -132,7 +155,8 @@ class _CambiarContrasenaScreenState extends State<CambiarContrasenaScreen> {
               SizedBox(
                 height: 80,
               ),
-              Container(
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
                 height: 300,
                 width: 350,
                 decoration: BoxDecoration(
@@ -146,12 +170,14 @@ class _CambiarContrasenaScreenState extends State<CambiarContrasenaScreen> {
                     _buildInputField('Contraseña Actual', _claveController),
                     const SizedBox(height: 35),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        AuthService authService = AuthService();
+                        final contrasenaVieja = await authService.getPassword();
                         setState(() {
-                          if (_claveController.text == "123")
-                            _showNoticiaDialog(context);
+                          if (_claveController.text == contrasenaVieja)
+                            showAnimatedDialog(context);
 
-                          if (_claveController.text != "123")
+                          if (_claveController.text != contrasenaVieja)
                             verificador1 = false;
                         });
                       },
@@ -193,13 +219,15 @@ class _CambiarContrasenaScreenState extends State<CambiarContrasenaScreen> {
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
           ),
           const SizedBox(height: 20),
-          Container(
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 600),
+            curve: Curves.easeInOut,
             padding: const EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
                   color:
-                      verificador1 == verificador2 ? Colors.black : Colors.red,
+                      verificador1 == verificador2 ? Colors.green : Colors.red,
                   width: 2.5),
             ),
             child: TextField(
@@ -216,45 +244,93 @@ class _CambiarContrasenaScreenState extends State<CambiarContrasenaScreen> {
     );
   }
 
-  void _showNoticiaDialog(BuildContext context) {
-    verificador1 = true;
-    showDialog(
+  void showAnimatedDialog(BuildContext context) {
+    showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       builder: (BuildContext context) {
-        return AlertDialog(
-          //backgroundColor: Colors.white,
-          surfaceTintColor: Colors.white,
-          shadowColor: Colors.black,
-          content: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildInputField('Nueva contraseña', _claveNuevaController),
-                SizedBox(height: 10),
-                _buildInputField('Repita la Contraseña', _claveNueva2Controller)
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                verificador2 = _comparador();
-                setState(() {
-                  if (verificador2) {
-                    _submitForm();
-                    Navigator.of(context).pop();
-                  }
-                });
-              },
-              child: Text('Aceptar'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Cancelar'),
-            ),
-          ],
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return AnimatedContainer(
+              duration: Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+              padding: EdgeInsets.all(16),
+              height: MediaQuery.of(context).size.height * 0.4,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildInputField('Nueva contraseña', _claveNuevaController),
+                    SizedBox(height: 10),
+                    _buildInputField(
+                        'Repita la Contraseña', _claveNueva2Controller),
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 30),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black,
+                                spreadRadius: 2,
+                                blurRadius: 10,
+                                blurStyle: BlurStyle.solid,
+                              ),
+                            ]
+                          ),
+                          child: TextButton(
+                            onPressed: () {
+                              setState(() {
+                                verificador2 = _comparador();
+                                if (verificador2) {
+                                  _submitForm();
+                                  Navigator.pop(context);
+                                }
+                              });
+                            },
+                            child: Text('Aceptar'),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 30),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black,
+                                spreadRadius: 2,
+                                blurRadius: 10,
+                                blurStyle: BlurStyle.solid,
+                              ),
+                            ]
+                          ),
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator
+                                  .pop(context); 
+                            },
+                            child: Text('Cancelar'),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
         );
       },
     );

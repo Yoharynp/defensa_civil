@@ -1,6 +1,10 @@
 import 'dart:convert';
+import 'package:defensa_civil/Screens/Extras/funciton_login.dart';
+import 'package:defensa_civil/Widgets/auth_provider.dart';
+import 'package:defensa_civil/Widgets/elemntos.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class NoticiasEspecificasScreen extends StatefulWidget {
   const NoticiasEspecificasScreen({Key? key}) : super(key: key);
@@ -14,6 +18,8 @@ class _NoticiasEspecificasScreenState extends State<NoticiasEspecificasScreen> {
   late Future<List<Map<String, dynamic>>> _noticiasFuture;
   late Map<String, dynamic> _selectedNoticia;
 
+  
+
   @override
   void initState() {
     super.initState();
@@ -22,12 +28,14 @@ class _NoticiasEspecificasScreenState extends State<NoticiasEspecificasScreen> {
   }
 
   Future<List<Map<String, dynamic>>> _fetchNoticias() async {
+    final AuthService authService = AuthService();
+    final token = await authService.getToken();
     final response = await http.post(
         Uri.parse(
             'https://adamix.net/defensa_civil/def/noticias_especificas.php'),
         body: {
           //cambiar token al real
-          'token': "576abda2df1ef7bcb05dd0bb5ffe0256",
+          'token': token,
         });
 
     if (response.statusCode == 200) {
@@ -40,6 +48,7 @@ class _NoticiasEspecificasScreenState extends State<NoticiasEspecificasScreen> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       backgroundColor: Color.fromRGBO(238, 120, 46, 1),
       body: Column(

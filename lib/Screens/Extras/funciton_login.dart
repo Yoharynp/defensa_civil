@@ -75,4 +75,9 @@ class AuthService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('claveusuario');
   }
+  Future<String?> setNewPassword(String clave) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('claveusuario', clave);
+    return prefs.getString('claveusuario');
+  }
 }
